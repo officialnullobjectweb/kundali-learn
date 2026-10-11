@@ -30,7 +30,6 @@ import { BookView } from '@/components/chart/BookView';
 import { ExplorePanel } from '@/components/chart/ExplorePanel';
 import { activeViewKey } from '@/components/chart/ChartSelector';
 import { Legend } from '@/components/chart/ChartChrome';
-import { QuickActions } from '@/components/chart/QuickActions';
 import { AiPromptModal } from '@/components/ai/AiPromptModal';
 import type { AiPromptInput } from '@/lib/ai-prompt';
 import { ChartHeader, InstructionCard } from '@/components/chart/ChartHeader';
@@ -219,10 +218,9 @@ export default function Page() {
           <aside className="sidebar-left" aria-label="Planets and actions">
             <BirthForm />
             <PlanetTray />
-            <QuickActions onOpenBook={() => setBookOpen(true)} onOpenAi={() => setAiOpen(true)} placedCount={placedCount} />
           </aside>
           <section className="workspace" aria-label="Chart workspace">
-            <ChartHeader />
+            <ChartHeader onOpenBook={() => setBookOpen(true)} onOpenAi={() => setAiOpen(true)} placedCount={placedCount} />
             <InstructionCard />
             <div className="chart-wrap">
               <AnimatePresence mode="wait">

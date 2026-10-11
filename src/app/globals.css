@@ -234,7 +234,7 @@ body {
 .workspace { min-height: 0; max-height: 100%; overflow: visible; display: flex; flex-direction: column; gap: 12px; }
 
 /* ---------- Cards ---------- */
-.card, .tray, .qa, .panel-card {
+.card, .tray, .panel-card {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -314,10 +314,6 @@ body {
 .birth-modal { max-width: 480px; width: 100%; max-height: 88dvh; overflow-y: auto; }
 .birth-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .birth-modal-head h3 { margin: 0; font-family: Georgia, serif; font-size: 20px; }
-
-/* ---------- Quick actions ---------- */
-.qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.qa-badge { margin-top: 8px; }
 
 /* ---------- Birth details (ephemeris auto-chart) ---------- */
 .birth {
@@ -580,6 +576,7 @@ body {
 .chart-head-left strong { font-family: Georgia, serif; font-size: 20px; font-weight: 600; display: block; }
 .chart-head-left small { font-size: 12px; color: var(--muted); display: block; max-width: 72ch; }
 .how-btn { white-space: nowrap; flex-shrink: 0; }
+.head-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; }
 
 .modal-veil {
   position: fixed;
@@ -944,7 +941,6 @@ body {
   .workspace { order: 1; min-height: 0; }
   .sidebar-right { order: 2; }
   .tray { order: 3; max-height: 170px; }
-  .qa { order: 4; }
   .tray-grid { display: flex; overflow-x: auto; overflow-y: hidden; padding-bottom: 6px; scroll-snap-type: x proximity; }
   .tray-chip { flex: 0 0 auto; width: 104px; scroll-snap-align: start; }
   .chart-head small { display: none; }

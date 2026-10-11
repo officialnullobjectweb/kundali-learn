@@ -28,12 +28,22 @@ function BulbIcon() {
   );
 }
 
-export function ChartHeader() {
+export function ChartHeader({
+  onOpenBook,
+  onOpenAi,
+  placedCount,
+}: {
+  onOpenBook: () => void;
+  onOpenAi: () => void;
+  placedCount: number;
+}) {
   const view = useChartStore((s) => s.view);
+  const mode = useChartStore((s) => s.mode);
   const lang = useChartStore((s) => s.lang);
   const S = STRINGS[lang];
   const key = activeViewKey(view);
   const [howOpen, setHowOpen] = useState(false);
+  const st = useChartStore.getState();
 
   useEffect(() => {
     if (!howOpen) return;
@@ -60,6 +70,23 @@ export function ChartHeader() {
       <button className="btn how-btn" onClick={() => setHowOpen(true)}>
         <span aria-hidden>▶</span> {S.howItWorks}
       </button>
+      <span className="head-actions">
+        <button className="btn" onClick={onOpenBook}>
+          {S.bookOpen} ({placedCount}/9)
+        </button>
+        <button className="btn active" onClick={onOpenAi}>
+          {S.qaAi}
+        </button>
+        {mode === 'birth' ? (
+          <button className="btn ghost" onClick={() => st.enterExplore()} aria-pressed="false">
+            {S.explore}
+          </button>
+        ) : (
+          <button className="btn ghost active" onClick={() => st.exitExplore()} aria-pressed="true">
+            {S.discard}
+          </button>
+        )}
+      </span>
       {howOpen && (
         <div className="modal-veil" onClick={() => setHowOpen(false)}>
           <div

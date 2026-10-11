@@ -37,10 +37,8 @@ export interface UIStrings {
   retro: string;
   houseWord: string;
   explore: string;
-  exploring: string;
   keep: string;
   discard: string;
-  reset: string;
   resetExperiment: string;
   whatIfTitle: string;
   beforeCol: string;
@@ -81,8 +79,6 @@ export interface UIStrings {
   instrLine1: string;
   instrLine2: string;
   instrClose: string;
-  qaTitle: string;
-  qaAutoFill: string;
   allCats: string;
   inPhysical: string;
   inMental: string;
@@ -201,10 +197,8 @@ const EN: UIStrings = {
   retro: 'retrograde',
   houseWord: 'House',
   explore: 'Enter Explore (what-if)',
-  exploring: 'Exploring — birth preserved',
   keep: 'Keep as birth',
   discard: 'Exit explore',
-  reset: 'Reset',
   resetExperiment: 'Reset Experiment',
   whatIfTitle: 'What changed',
   beforeCol: 'Before',
@@ -255,8 +249,6 @@ const EN: UIStrings = {
   instrLine1: 'Set the rashis first — drop any rashi number onto any house; all twelve houses fill automatically.',
   instrLine2: 'Then place the planets — drag them from the left into houses. Rahu and Ketu always move together, 180° apart.',
   instrClose: 'Hide instructions',
-  qaTitle: 'Quick Actions',
-  qaAutoFill: 'Auto Fill (Demo)',
   allCats: 'All',
   inPhysical: 'Physical Energy',
   inMental: 'Mental Strength',
@@ -438,10 +430,8 @@ const HINGLISH: UIStrings = {
   retro: 'vakri',
   houseWord: 'Ghar',
   explore: 'Explore shuru karein (what-if)',
-  exploring: 'Explore chal raha — janm kundali surakshit',
   keep: 'Janm kundali banayein',
   discard: 'Explore band karein',
-  reset: 'Reset',
   resetExperiment: 'Experiment reset karein',
   whatIfTitle: 'Kya badla',
   beforeCol: 'Pehle',
@@ -492,8 +482,6 @@ const HINGLISH: UIStrings = {
   instrLine1: 'Pehle rashiyan set karein — kisi bhi rashi number ko kisi bhi ghar par chhodein; baarahon ghar apne aap bhar jayenge.',
   instrLine2: 'Phir grah rakhein — left se gharon mein kheenchein. Rahu aur Ketu hamesha saath, 180° par move hote hain.',
   instrClose: 'Instructions chhupayein',
-  qaTitle: 'Quick Actions',
-  qaAutoFill: 'Auto Fill (Demo)',
   allCats: 'Sabhi',
   inPhysical: 'Physical Energy',
   inMental: 'Mental Strength',
@@ -690,10 +678,8 @@ const HI: UIStrings = {
   retro: 'वक्री',
   houseWord: 'घर',
   explore: 'एक्सप्लोर शुरू करें',
-  exploring: 'एक्सप्लोर चल रहा — जन्म कुंडली सुरक्षित',
   keep: 'जन्म कुंडली बनाएं',
   discard: 'एक्सप्लोर बंद करें',
-  reset: 'रीसेट',
   resetExperiment: 'प्रयोग रीसेट करें',
   whatIfTitle: 'क्या बदला',
   beforeCol: 'पहले',
@@ -744,8 +730,6 @@ const HI: UIStrings = {
   instrLine1: 'पहले राशियाँ तय करें — किसी भी राशि संख्या को किसी भी घर पर छोड़ें; बारहों घर अपने आप भर जाएंगे।',
   instrLine2: 'फिर ग्रह रखें — बाएँ से घरों में खींचें। राहु और केतु हमेशा साथ, 180° पर चलते हैं।',
   instrClose: 'निर्देश छुपाएँ',
-  qaTitle: 'त्वरित क्रियाएँ',
-  qaAutoFill: 'ऑटो भरें (डेमो)',
   allCats: 'सभी',
   inPhysical: 'शारीरिक ऊर्जा',
   inMental: 'मानसिक बल',
