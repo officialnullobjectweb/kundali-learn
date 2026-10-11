@@ -42,17 +42,7 @@ export function ChartHeader({
   const lang = useChartStore((s) => s.lang);
   const S = STRINGS[lang];
   const key = activeViewKey(view);
-  const [howOpen, setHowOpen] = useState(false);
   const st = useChartStore.getState();
-
-  useEffect(() => {
-    if (!howOpen) return;
-    const onKey = (e: KeyboardEvent): void => {
-      if (e.key === 'Escape') setHowOpen(false);
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [howOpen]);
 
   return (
     <div className="chart-head">
@@ -60,16 +50,11 @@ export function ChartHeader({
         <span className="chart-head-icon" aria-hidden>
           <ChartGlyph />
         </span>
-        <span>
+        <span className="chart-head-titles" title={`${S.views[key].tagline} • ${S.views[key].about}`}>
           <strong>{S.views[key].label}</strong>
-          <small>
-            {S.views[key].tagline} • {S.views[key].about}
-          </small>
+          <small>{S.views[key].tagline}</small>
         </span>
       </div>
-      <button className="btn how-btn" onClick={() => setHowOpen(true)}>
-        <span aria-hidden>▶</span> {S.howItWorks}
-      </button>
       <span className="head-actions">
         <button className="btn" onClick={onOpenBook}>
           {S.bookOpen} ({placedCount}/9)
@@ -87,27 +72,6 @@ export function ChartHeader({
           </button>
         )}
       </span>
-      {howOpen && (
-        <div className="modal-veil" onClick={() => setHowOpen(false)}>
-          <div
-            className="modal"
-            role="dialog"
-            aria-modal="true"
-            aria-label={S.howTitle}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3>{S.howTitle}</h3>
-            <ol>
-              {S.howSteps.map((step, i) => (
-                <li key={i}>{step}</li>
-              ))}
-            </ol>
-            <button className="btn" onClick={() => setHowOpen(false)} autoFocus>
-              {S.bookClose}
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

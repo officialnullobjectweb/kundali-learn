@@ -57,7 +57,17 @@ function PageBody({ blocks, dict }: { blocks: BookBlock[]; dict: S }) {
  * page animates a real leaf (front + back faces in 3D) over the spread and
  * commits the new spread only when the turn completes.
  */
-export function BookView({ book, onClose }: { book: ChartBook; onClose: () => void }) {
+export function BookView({
+  book,
+  birthISO,
+  placeLabel,
+  onClose,
+}: {
+  book: ChartBook;
+  birthISO: string | null;
+  placeLabel: string | null;
+  onClose: () => void;
+}) {
   const lang = useChartStore((s) => s.lang);
   const dict: S = STRINGS[lang];
   const c = book.cover;
@@ -120,8 +130,14 @@ export function BookView({ book, onClose }: { book: ChartBook; onClose: () => vo
       return (
         <div className="scripture-cover">
           <div className="scripture-orn large">❦</div>
+          <p className="cover-kicker">{dict.bookCover}</p>
           <h2>{c.name !== '' ? c.name : dict.bookOpen}</h2>
-          <h3>{dict.bookCover}</h3>
+          <div className="cover-rule" aria-hidden />
+          {(birthISO || placeLabel) && (
+            <p className="cover-born">
+              {[birthISO, placeLabel].filter(Boolean).join(' · ')}
+            </p>
+          )}
           {!complete && <p className="book-warn">{dict.bookIncomplete}</p>}
           <p>
             {dict.fRashi}: {dict.rashi[c.ascendantRashi]} · {dict.fDegree}: {toDMS(c.ascendantDegree)}

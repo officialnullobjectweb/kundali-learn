@@ -1,19 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LANG_OPTIONS, STRINGS } from '@/i18n/strings';
-import { THEME_ORDER } from '@/components/chart/themes';
+import { STRINGS } from '@/i18n/strings';
 import { useChartStore } from '@/state/chart-store';
 import { useProfileStore } from '@/state/profile-store';
 import { Dropdown } from '@/components/ui/Dropdown';
-import type { ChartTheme } from '@/domain/types';
 
-type Section = 'profiles' | 'ai' | 'appearance' | 'connection';
+type Section = 'profiles' | 'ai';
 
 export function SettingsModal({ onClose, onOpenAi }: { onClose: () => void; onOpenAi: () => void }) {
   const lang = useChartStore((s) => s.lang);
-  const theme = useChartStore((s) => s.theme);
-  const appTheme = useChartStore((s) => s.appTheme);
   const nativeName = useChartStore((s) => s.nativeName);
   const S = STRINGS[lang];
   const [section, setSection] = useState<Section>('profiles');
@@ -23,7 +19,6 @@ export function SettingsModal({ onClose, onOpenAi }: { onClose: () => void; onOp
   const [showNew, setShowNew] = useState(false);
   const [newProfileName, setNewProfileName] = useState('');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
-  const [health, setHealth] = useState<{ mongo: string; profiles?: number } | null>(null);
 
   const profiles = useProfileStore((s) => s.profiles);
   const activeProfileId = useProfileStore((s) => s.activeProfileId);
@@ -39,15 +34,10 @@ export function SettingsModal({ onClose, onOpenAi }: { onClose: () => void; onOp
   const ensureConnectUrl = useProfileStore((s) => s.ensureConnectUrl);
   const revokeSecret = useProfileStore((s) => s.revokeSecret);
 
-  const st = useChartStore.getState();
   const pick = profilePick || profiles[0]?.id || '';
 
   useEffect(() => {
     refreshProfiles().catch(() => undefined);
-    fetch('/api/health', { cache: 'no-store' })
-      .then((r) => r.json())
-      .then((h) => setHealth(h as { mongo: string; profiles?: number }))
-      .catch(() => setHealth({ mongo: 'error' }));
     const onKey = (e: KeyboardEvent): void => {
       if (e.key === 'Escape') onClose();
     };
@@ -110,8 +100,6 @@ export function SettingsModal({ onClose, onOpenAi }: { onClose: () => void; onOp
   const tabs: { key: Section; label: string }[] = [
     { key: 'profiles', label: S.setProfiles },
     { key: 'ai', label: S.setAi },
-    { key: 'appearance', label: S.setAppear },
-    { key: 'connection', label: S.setConn },
   ];
 
   return (
@@ -284,63 +272,6 @@ export function SettingsModal({ onClose, onOpenAi }: { onClose: () => void; onOp
               </div>
             )}
 
-            {section === 'appearance' && (
-              <div className="settings-rows">
-                <label className="settings-row">
-                  <span>{S.setLang}</span>
-                  <select value={lang} onChange={(e) => st.setLang(e.target.value as typeof lang)} aria-label={S.setLang}>
-                    {LANG_OPTIONS.map((o) => (
-                      <option key={o.lang} value={o.lang}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="settings-row">
-                  <span>{S.setChartStyle}</span>
-                  <select
-                    value={theme}
-                    onChange={(e) => st.setTheme(e.target.value as ChartTheme)}
-                    aria-label={S.setChartStyle}
-                  >
-                    {THEME_ORDER.map((t) => (
-                      <option key={t} value={t}>
-                        {t === 'classic' ? S.tplClassic : t === 'midnight' ? S.tplMidnight : S.tplSand}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="settings-row check">
-                  <span>{S.setDarkMode}</span>
-                  <button
-                    role="switch"
-                    aria-checked={appTheme === 'dark'}
-                    className={`switch${appTheme === 'dark' ? ' on' : ''}`}
-                    onClick={() => st.setAppTheme(appTheme === 'dark' ? 'light' : 'dark')}
-                    aria-label={S.setDarkMode}
-                  >
-                    <span className="knob" />
-                  </button>
-                </label>
-                <p className="ai-note">
-                  {S.tplLabel}: {THEME_ORDER.length} styles
-                </p>
-              </div>
-            )}
-
-            {section === 'connection' && (
-              <div className="settings-rows">
-                <div className="settings-row">
-                  <span>{S.setMongo}</span>
-                  <span className={`health-dot${health?.mongo === 'connected' ? ' ok' : ''}`} aria-label={health?.mongo ?? '…'}>
-                    {health ? (health.mongo === 'connected' ? S.setConnected : health.mongo === 'unconfigured' ? S.setNotConfigured : health.mongo) : '…'}
-                  </span>
-                </div>
-                <p className="ai-note">
-                  {S.setCloud} · {profiles.length} · {profiles.reduce((a, p) => a + p.natives.length, 0)}
-                </p>
-              </div>
-            )}
           </div>
         </div>
       </div>

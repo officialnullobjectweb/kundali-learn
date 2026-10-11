@@ -246,7 +246,14 @@ export default function Page() {
 
       {mode === 'explore' && diff && <ExplorePanel diff={diff} />}
 
-      {bookOpen && book && <BookView book={book} onClose={() => setBookOpen(false)} />}
+      {bookOpen && book && (
+        <BookView
+          book={book}
+          birthISO={birthISO}
+          placeLabel={birthPlace?.label ?? null}
+          onClose={() => setBookOpen(false)}
+        />
+      )}
       {aiOpen && aiInput && <AiPromptModal input={aiInput} onClose={() => setAiOpen(false)} />}
     </main>
   );

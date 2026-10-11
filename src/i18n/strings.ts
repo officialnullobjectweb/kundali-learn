@@ -136,8 +136,6 @@ export interface UIStrings {
   setTitle: string;
   setProfiles: string;
   setAi: string;
-  setAppear: string;
-  setConn: string;
   setSaveCurrent: string;
   setNamePh: string;
   setLoad: string;
@@ -147,12 +145,6 @@ export interface UIStrings {
   setLocal: string;
   setOpenPrompt: string;
   setMcpUrl: string;
-  setLang: string;
-  setChartStyle: string;
-  setDarkMode: string;
-  setMongo: string;
-  setConnected: string;
-  setNotConfigured: string;
   setActive: string;
   setConnect: string;
   setConnectHint: string;
@@ -359,8 +351,6 @@ const EN: UIStrings = {
   setTitle: 'Settings',
   setProfiles: 'Profiles',
   setAi: 'AI & Sharing',
-  setAppear: 'Appearance',
-  setConn: 'Connection & Data',
   setSaveCurrent: 'Save current chart',
   setNamePh: 'Name, e.g. Aarav',
   setLoad: 'Load',
@@ -370,12 +360,6 @@ const EN: UIStrings = {
   setLocal: 'On this device',
   setOpenPrompt: 'Open AI reading prompt',
   setMcpUrl: 'MCP server URL',
-  setLang: 'Language',
-  setChartStyle: 'Chart style',
-  setDarkMode: 'Dark mode',
-  setMongo: 'Database',
-  setConnected: 'Connected',
-  setNotConfigured: 'Not configured — using this device only',
   setActive: 'Active',
   setConnect: 'Connect',
   setConnectHint: 'Personal AI link — the AI opens this profile automatically',
@@ -592,8 +576,6 @@ const HINGLISH: UIStrings = {
   setTitle: 'Settings',
   setProfiles: 'Profiles',
   setAi: 'AI aur Sharing',
-  setAppear: 'Dikhawat',
-  setConn: 'Connection aur Data',
   setSaveCurrent: 'Current chart save karein',
   setNamePh: 'Naam, jaise Aarav',
   setLoad: 'Load karein',
@@ -603,12 +585,6 @@ const HINGLISH: UIStrings = {
   setLocal: 'Is device par',
   setOpenPrompt: 'AI reading prompt kholein',
   setMcpUrl: 'MCP server URL',
-  setLang: 'Bhasha',
-  setChartStyle: 'Chart style',
-  setDarkMode: 'Dark mode',
-  setMongo: 'Database',
-  setConnected: 'Connected',
-  setNotConfigured: 'Configure nahi hai — sirf is device par',
   setActive: 'Active',
   setConnect: 'Connect karein',
   setConnectHint: 'Personal AI link — AI khud yeh profile khol lega',
@@ -840,8 +816,6 @@ const HI: UIStrings = {
   setTitle: 'सेटिंग्स',
   setProfiles: 'प्रोफाइल',
   setAi: 'एआई और शेयरिंग',
-  setAppear: 'रूप',
-  setConn: 'कनेक्शन और डेटा',
   setSaveCurrent: 'वर्तमान कुंडली सहेजें',
   setNamePh: 'नाम, जैसे आरव',
   setLoad: 'लोड करें',
@@ -851,12 +825,6 @@ const HI: UIStrings = {
   setLocal: 'इस डिवाइस पर',
   setOpenPrompt: 'एआई रीडिंग प्रॉम्प्ट खोलें',
   setMcpUrl: 'एमसीपी सर्वर यूआरएल',
-  setLang: 'भाषा',
-  setChartStyle: 'चार्ट शैली',
-  setDarkMode: 'डार्क मोड',
-  setMongo: 'डेटाबेस',
-  setConnected: 'जुड़ा है',
-  setNotConfigured: 'कॉन्फ़िगर नहीं है — केवल इस डिवाइस पर',
   setActive: 'सक्रिय',
   setConnect: 'कनेक्ट करें',
   setConnectHint: 'व्यक्तिगत एआई लिंक — एआई स्वयं यह प्रोफाइल खोल लेगा',

@@ -8,7 +8,6 @@ import type { BuiltChart, DomainAnalysis, Graha, TopicId, YogaResult } from '@/d
 import { STRINGS } from '@/i18n/strings';
 import { useChartStore } from '@/state/chart-store';
 import { ReadingPanel } from './ReadingPanel';
-import { ChartInfoPanel } from './ChartInfoPanel';
 
 export type Category = TopicId | 'all';
 
@@ -214,13 +213,12 @@ export function InsightPanel({
 }) {
   const lang = useChartStore((s) => s.lang);
   const S = STRINGS[lang];
-  const [tab, setTab] = useState<'overview' | 'reading' | 'insights' | 'inspect'>('overview');
+  const [tab, setTab] = useState<'overview' | 'reading' | 'insights'>('overview');
   const [cat, setCat] = useState<Category>('all');
   const tabs = [
     { key: 'overview', label: S.sideOverview },
     { key: 'reading', label: S.sideReading },
     { key: 'insights', label: S.sideInsights },
-    { key: 'inspect', label: S.sideInspect },
   ] as const;
 
   return (
@@ -263,7 +261,6 @@ export function InsightPanel({
         {tab === 'insights' && built && (
           <InsightsView built={built} placed={placed} analyses={analyses} yogas={yogas} />
         )}
-        {tab === 'inspect' && <ChartInfoPanel built={built} />}
       </div>
     </div>
   );
