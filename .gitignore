@@ -1,0 +1,7 @@
+/.next
+/.playwright-mcp
+/node_modules
+/dist
+/.env
+/.gitignore/tsconfig.tsbuildinfo
+.DS_Store
