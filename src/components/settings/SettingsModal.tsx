@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { STRINGS } from '@/i18n/strings';
+import { toastError } from '@/components/ui/Toast';
 import { useChartStore } from '@/state/chart-store';
 import { useProfileStore } from '@/state/profile-store';
 import { Dropdown } from '@/components/ui/Dropdown';
@@ -52,7 +53,10 @@ export function SettingsModal({ onClose, onOpenAi }: { onClose: () => void; onOp
 
   const copyUrl = async (pid: string): Promise<void> => {
     const url = await ensureConnectUrl(pid);
-    if (!url) return;
+    if (!url) {
+      toastError(S.toastNoLink);
+      return;
+    }
     try {
       await navigator.clipboard.writeText(url);
     } catch {

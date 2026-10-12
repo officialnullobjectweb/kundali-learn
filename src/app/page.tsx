@@ -34,6 +34,7 @@ import { AiPromptModal } from '@/components/ai/AiPromptModal';
 import type { AiPromptInput } from '@/lib/ai-prompt';
 import { ChartHeader, InstructionCard } from '@/components/chart/ChartHeader';
 import { Header } from '@/components/layout/Header';
+import { Toasts } from '@/components/ui/Toast';
 
 export default function Page() {
   const appTheme = useChartStore((s) => s.appTheme);
@@ -255,6 +256,7 @@ export default function Page() {
         />
       )}
       {aiOpen && aiInput && <AiPromptModal input={aiInput} onClose={() => setAiOpen(false)} />}
+      <Toasts />
     </main>
   );
 }

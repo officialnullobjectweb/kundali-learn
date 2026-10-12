@@ -18,6 +18,7 @@ export function Dropdown({
   icon?: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const [up, setUp] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,6 +31,10 @@ export function Dropdown({
     };
     document.addEventListener('pointerdown', onDown);
     document.addEventListener('keydown', onKey);
+    // Flip upward when there is no room below (stays in the foreground).
+    const rect = ref.current?.getBoundingClientRect();
+    if (rect && window.innerHeight - rect.bottom < 240) setUp(true);
+    else setUp(false);
     return () => {
       document.removeEventListener('pointerdown', onDown);
       document.removeEventListener('keydown', onKey);
@@ -53,7 +58,7 @@ export function Dropdown({
         <span aria-hidden className="lang-caret">▾</span>
       </button>
       {open && (
-        <div className="lang-menu" role="menu">
+        <div className={`lang-menu${up ? ' up' : ''}`} role="menu">
           {options.map((o) => (
             <button
               key={o.value}

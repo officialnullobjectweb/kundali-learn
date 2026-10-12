@@ -5,7 +5,8 @@
 // otherwise local (localStorage). MCP connects per profile via its API secret.
 import { create } from 'zustand';
 import type { Graha } from '@/domain/types';
-import type { Lang } from '@/i18n/strings';
+import { STRINGS, type Lang } from '@/i18n/strings';
+import { toastError } from '@/components/ui/Toast';
 import { useChartStore } from './chart-store';
 
 export interface ClientNative {
@@ -183,7 +184,10 @@ export const useProfileStore = create<ProfileStore>()((set, get) => ({
 
   saveNative: async (profileId, name, gender) => {
     const cur = currentChart();
-    if (!cur) return null;
+    if (!cur) {
+      toastError(STRINGS[useChartStore.getState().lang].toastNoChart);
+      return null;
+    }
     const { st, chart } = cur;
     const { source, profiles } = get();
     const acct = get().accountId;

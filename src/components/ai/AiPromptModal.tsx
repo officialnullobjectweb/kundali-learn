@@ -5,6 +5,7 @@ import { STRINGS } from '@/i18n/strings';
 import { useChartStore } from '@/state/chart-store';
 import { useProfileStore } from '@/state/profile-store';
 import { buildAiPrompt, type AiPromptInput } from '@/lib/ai-prompt';
+import { toastError } from '@/components/ui/Toast';
 
 type Tab = 'prompt' | 'chatgpt' | 'claude' | 'gemini' | 'perplexity' | 'kimi' | 'mcp';
 
@@ -74,6 +75,8 @@ export function AiPromptModal({ input, onClose }: { input: AiPromptInput; onClos
     if (await copyText(t)) {
       setCopied(which);
       window.setTimeout(() => setCopied((c) => (c === which ? null : c)), 1800);
+    } else {
+      toastError(STRINGS[useChartStore.getState().lang].toastCopyFail);
     }
   };
 

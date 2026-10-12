@@ -160,6 +160,9 @@ export interface UIStrings {
   setCopyLink: string;
   setResetLink: string;
   setDownloadCfg: string;
+  toastNoChart: string;
+  toastNoLink: string;
+  toastCopyFail: string;
   graha: Record<Graha, string>;
   rashi: string[];
   nakshatra: string[];
@@ -375,6 +378,9 @@ const EN: UIStrings = {
   setCopyLink: 'Copy AI link',
   setResetLink: 'Reset link',
   setDownloadCfg: 'Download config file',
+  toastNoChart: 'Nothing to save yet — build the chart first.',
+  toastNoLink: 'Connect needs internet and database — try again.',
+  toastCopyFail: 'Copy failed — touch and hold the text to copy it.',
   graha: {
     Sun: 'Sun',
     Moon: 'Moon',
@@ -600,6 +606,9 @@ const HINGLISH: UIStrings = {
   setCopyLink: 'AI link copy karein',
   setResetLink: 'Link reset karein',
   setDownloadCfg: 'Config file download karein',
+  toastNoChart: 'Abhi save karne ko kuch nahi — pehle chart banayein.',
+  toastNoLink: 'Connect ke liye internet aur database chahiye — phir try karein.',
+  toastCopyFail: 'Copy nahi hua — text ko touch-hold karke copy karein.',
   graha: {
     Sun: 'Surya',
     Moon: 'Chandrama',
@@ -840,6 +849,9 @@ const HI: UIStrings = {
   setCopyLink: 'एआई लिंक कॉपी करें',
   setResetLink: 'लिंक रीसेट करें',
   setDownloadCfg: 'कॉन्फ़िग फ़ाइल डाउनलोड करें',
+  toastNoChart: 'अभी सहेजने को कुछ नहीं — पहले कुंडली बनाएँ।',
+  toastNoLink: 'कनेक्ट के लिए इंटरनेट और डेटाबेस चाहिए — पुनः प्रयास करें।',
+  toastCopyFail: 'कॉपी नहीं हुआ — टेक्स्ट को दबाकर कॉपी करें।',
   graha: {
     Sun: 'सूर्य',
     Moon: 'चंद्रमा',
