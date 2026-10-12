@@ -1,9 +1,11 @@
 // Shared guards for the profile/natives REST API: rate limiting, id shape,
 // and owner checks. One place, every route uses it.
 import mongoose from 'mongoose';
+import { getServerSession } from 'next-auth';
 import { connectMongo, isMongoConfigured } from '@/lib/mongo';
 import { ProfileModel, type ProfileDoc } from '@/lib/models/Profile';
 import { callerFromRequest } from '@/lib/auth';
+import { authOptions } from '@/lib/auth-options';
 import { checkRateLimit, clientIp } from '@/lib/rate-limit';
 import { NextResponse } from 'next/server';
 import type { Graha } from '@/domain/types';
@@ -25,6 +27,18 @@ export function unconfigured(): NextResponse | null {
     : NextResponse.json({ error: 'unconfigured' }, { status: 503 });
 }
 
+/** Owner for this request: logged-in user id wins, else the anonymous browser id. */
+export async function effectiveOwnerId(req: Request): Promise<string | null> {
+  try {
+    const session = await getServerSession(authOptions);
+    const uid = (session?.user as { id?: string } | undefined)?.id;
+    if (uid) return uid;
+  } catch {
+    /* sessions unavailable (no secret configured): stay anonymous */
+  }
+  return callerFromRequest(req).accountId;
+}
+
 /** The doc, only when the caller owns its account. Legacy ownerless docs are read-only. */
 export async function ownedDoc(
   id: string,
@@ -35,8 +49,8 @@ export async function ownedDoc(
   if (!doc) return { error: 'not found', status: 404 };
   const owner = (doc.ownerId as string | null | undefined) ?? null;
   if (!owner) return { error: 'legacy profiles are read-only here', status: 403 };
-  const caller = callerFromRequest(req);
-  if (caller.accountId !== owner) return { error: 'forbidden', status: 403 };
+  const mine = await effectiveOwnerId(req);
+  if (mine !== owner) return { error: 'forbidden', status: 403 };
   return { doc: doc as mongoose.HydratedDocument<ProfileDoc> };
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { STRINGS } from '@/i18n/strings';
 import { useChartStore } from '@/state/chart-store';
 import { useProfileStore } from '@/state/profile-store';
@@ -52,6 +53,7 @@ function Steps({ items }: { items: string[] }) {
 
 export function AiPromptModal({ input, onClose }: { input: AiPromptInput; onClose: () => void }) {
   const lang = useChartStore((s) => s.lang);
+  const { data: session } = useSession();
   const S = STRINGS[lang];
   const [tab, setTab] = useState<Tab>('prompt');
   const [copied, setCopied] = useState<string | null>(null);
@@ -219,6 +221,7 @@ export function AiPromptModal({ input, onClose }: { input: AiPromptInput; onClos
               One link per profile serves its people as live tools — no paste needed once connected. Stateless, works on the free tier.
               Direct MCP link: Claude (Connectors/Desktop/CLI), Gemini CLI, ChatGPT developer/API tools, Kimi K2 API agents.
               ChatGPT, Perplexity and Kimi web apps take custom servers only via the pasted prompt tabs.
+              {session?.user?.email ? ` Connected as ${session.user.email} — the AI sees this account's profiles.` : ''}
             </p>
             {myMcpUrl ? (
               <div>

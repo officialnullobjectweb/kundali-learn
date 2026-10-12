@@ -49,6 +49,10 @@ interface ProfileStore {
   /** Full AI connect link (creates the profile secret on first use). Null when offline. */
   ensureConnectUrl: (profileId: string) => Promise<string | null>;
   revokeSecret: (profileId: string) => Promise<void>;
+  /** Rebind to a different account (login/logout) and reload its profiles. */
+  setAccountId: (id: string) => void;
+  /** Move this browser's anonymous device charts into the logged-in account. */
+  adoptDevice: () => Promise<number>;
 }
 
 const LS_KEY = 'kl-profiles';
@@ -336,5 +340,35 @@ export const useProfileStore = create<ProfileStore>()((set, get) => ({
     delete secrets[profileId];
     writeSecrets(secrets);
     await get().refresh().catch(() => undefined);
+  },
+
+  setAccountId: (id) => {
+    set({ accountId: id, activeProfileId: null, activeNativeId: null, loaded: false });
+    void get().refresh();
+  },
+
+  adoptDevice: async () => {
+    const anon = (() => {
+      try {
+        return window.localStorage.getItem(ACCT_KEY);
+      } catch {
+        return null;
+      }
+    })();
+    const mine = get().accountId;
+    if (!anon || !mine || anon === mine) return 0;
+    try {
+      const res = await fetch('/api/profiles/adopt', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ fromOwnerId: anon }),
+      });
+      if (!res.ok) return 0;
+      const data = (await res.json()) as { adopted?: number };
+      await get().refresh().catch(() => undefined);
+      return data.adopted ?? 0;
+    } catch {
+      return 0;
+    }
   },
 }));

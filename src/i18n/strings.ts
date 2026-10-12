@@ -163,6 +163,17 @@ export interface UIStrings {
   toastNoChart: string;
   toastNoLink: string;
   toastCopyFail: string;
+  authTitle: string;
+  authLogin: string;
+  authSignup: string;
+  authEmail: string;
+  authPassword: string;
+  authGoogle: string;
+  authFail: string;
+  authLogout: string;
+  authDob: string;
+  authTob: string;
+  authPob: string;
   graha: Record<Graha, string>;
   rashi: string[];
   nakshatra: string[];
@@ -381,6 +392,17 @@ const EN: UIStrings = {
   toastNoChart: 'Nothing to save yet — build the chart first.',
   toastNoLink: 'Connect needs internet and database — try again.',
   toastCopyFail: 'Copy failed — touch and hold the text to copy it.',
+  authTitle: 'Your account',
+  authLogin: 'Log in',
+  authSignup: 'Sign up',
+  authEmail: 'Email',
+  authPassword: 'Password (8+ characters)',
+  authGoogle: 'Continue with Google',
+  authFail: 'That did not work — check email and password.',
+  authLogout: 'Log out',
+  authDob: 'Born',
+  authTob: 'Time',
+  authPob: 'Place',
   graha: {
     Sun: 'Sun',
     Moon: 'Moon',
@@ -609,6 +631,17 @@ const HINGLISH: UIStrings = {
   toastNoChart: 'Abhi save karne ko kuch nahi — pehle chart banayein.',
   toastNoLink: 'Connect ke liye internet aur database chahiye — phir try karein.',
   toastCopyFail: 'Copy nahi hua — text ko touch-hold karke copy karein.',
+  authTitle: 'Aapka account',
+  authLogin: 'Log in karein',
+  authSignup: 'Naya account',
+  authEmail: 'Email',
+  authPassword: 'Password (8+ akshar)',
+  authGoogle: 'Google se aage badhein',
+  authFail: 'Yeh kaam nahi kiya — email aur password jaanchein.',
+  authLogout: 'Log out',
+  authDob: 'Janm',
+  authTob: 'Samay',
+  authPob: 'Sthan',
   graha: {
     Sun: 'Surya',
     Moon: 'Chandrama',
@@ -852,6 +885,17 @@ const HI: UIStrings = {
   toastNoChart: 'अभी सहेजने को कुछ नहीं — पहले कुंडली बनाएँ।',
   toastNoLink: 'कनेक्ट के लिए इंटरनेट और डेटाबेस चाहिए — पुनः प्रयास करें।',
   toastCopyFail: 'कॉपी नहीं हुआ — टेक्स्ट को दबाकर कॉपी करें।',
+  authTitle: 'आपका खाता',
+  authLogin: 'लॉग इन करें',
+  authSignup: 'नया खाता',
+  authEmail: 'ईमेल',
+  authPassword: 'पासवर्ड (8+ अक्षर)',
+  authGoogle: 'Google से आगे बढ़ें',
+  authFail: 'यह काम नहीं किया — ईमेल और पासवर्ड जाँचें।',
+  authLogout: 'लॉग आउट',
+  authDob: 'जन्म',
+  authTob: 'समय',
+  authPob: 'स्थान',
   graha: {
     Sun: 'सूर्य',
     Moon: 'चंद्रमा',

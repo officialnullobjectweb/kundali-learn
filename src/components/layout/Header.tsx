@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ChartTheme, ChartView } from '@/domain/types';
 import type { ViewKey } from '@/i18n/strings';
 import { STRINGS } from '@/i18n/strings';
 import { useChartStore } from '@/state/chart-store';
 import { THEME_ORDER, CHART_THEMES } from '@/components/chart/themes';
 import { SettingsModal } from '@/components/settings/SettingsModal';
+import { LoginModal } from '@/components/auth/LoginModal';
+import { ProfileIcon } from '@/components/auth/ProfileIcon';
 import { LanguageMenu } from '../ui/LanguageMenu';
 
 const TABS: { key: ViewKey; short: string; view: ChartView }[] = [
@@ -77,6 +79,14 @@ export function Header({ onOpenAi }: { onOpenAi: () => void }) {
   const setTheme = useChartStore((s) => s.setTheme);
   const S = STRINGS[lang];
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [googleOn, setGoogleOn] = useState(false);
+  useEffect(() => {
+    fetch('/api/health', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((h: { auth?: { google?: boolean } }) => setGoogleOn(!!h?.auth?.google))
+      .catch(() => undefined);
+  }, []);
   const active = TABS.find((t) => t.view.varga === view.varga && t.view.lagna === view.lagna)?.key ?? 'D1';
   const themeNames: Record<ChartTheme, string> = {
     classic: S.tplClassic,
@@ -114,6 +124,7 @@ export function Header({ onOpenAi }: { onOpenAi: () => void }) {
         ))}
       </nav>
       <div className="topbar-right">
+        <ProfileIcon onManage={() => setSettingsOpen(true)} onLogin={() => setLoginOpen(true)} />
         <button
           className="icon-btn gear-btn"
           onClick={() => setSettingsOpen(true)}
@@ -164,6 +175,7 @@ export function Header({ onOpenAi }: { onOpenAi: () => void }) {
         </button>
       </div>
       {settingsOpen && <SettingsModal onClose={() => setSettingsOpen(false)} onOpenAi={onOpenAi} />}
+      {loginOpen && <LoginModal onClose={() => setLoginOpen(false)} googleOn={googleOn} />}
     </header>
   );
 }
