@@ -132,8 +132,8 @@ export interface UIStrings {
   aiTitle: string;
   aiPrompt: string;
   aiCopy: string;
-  aiCopied: string;
-  setTitle: string;
+    aiCopied: string;
+  aiGuideTeaser: string;  setTitle: string;
   setProfiles: string;
   setAi: string;
   setSaveCurrent: string;
@@ -362,6 +362,7 @@ const EN: UIStrings = {
   aiPrompt: 'Prompt',
   aiCopy: 'Copy prompt',
   aiCopied: 'Copied!',
+  aiGuideTeaser: 'Tap a logo for the picture guide',
   setTitle: 'Settings',
   setProfiles: 'Profiles',
   setAi: 'AI & Sharing',
@@ -601,6 +602,7 @@ const HINGLISH: UIStrings = {
   aiPrompt: 'Prompt',
   aiCopy: 'Prompt copy karein',
   aiCopied: 'Copy ho gaya!',
+  aiGuideTeaser: 'Picture guide ke liye logo dabayein',
   setTitle: 'Settings',
   setProfiles: 'Profiles',
   setAi: 'AI aur Sharing',
@@ -855,6 +857,7 @@ const HI: UIStrings = {
   aiPrompt: 'प्रॉम्प्ट',
   aiCopy: 'प्रॉम्प्ट कॉपी करें',
   aiCopied: 'कॉपी हो गया!',
+  aiGuideTeaser: 'चित्र गाइड के लिए लोगो दबाएँ',
   setTitle: 'सेटिंग्स',
   setProfiles: 'प्रोफाइल',
   setAi: 'एआई और शेयरिंग',

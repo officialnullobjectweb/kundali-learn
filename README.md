@@ -44,6 +44,8 @@ Without MongoDB the app runs fully on-device (profiles stay in the browser).
    - **ChatGPT / Perplexity / Kimi web** — these apps don't accept custom MCP servers: use the AI Reading → Prompt tab, paste once as the first message. Same full context, same response rules.
 4. Ask anything. For a second person, the AI lists the profile's natives and asks who to read — answers never mix people.
 
+In the app, tap the **Claude / Gemini / ChatGPT** logo cards for picture guides with every step and all slash commands (`list_natives`, `get_native`, `get_native_varga`…), e.g. *“Show Aarav's D9 Navamsha.”*
+
 Limits keep the free database safe: 60 calls/min per link, 180/min per IP. Secrets are hashed server-side and revocable anytime (Reset link).
 
 ## API overview

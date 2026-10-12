@@ -7,6 +7,7 @@ import { useChartStore } from '@/state/chart-store';
 import { useProfileStore } from '@/state/profile-store';
 import { buildAiPrompt, type AiPromptInput } from '@/lib/ai-prompt';
 import { toastError } from '@/components/ui/Toast';
+import { BrandCards, GuidesModal, type GuidePlatform } from './GuidesModal';
 
 type Tab = 'prompt' | 'chatgpt' | 'claude' | 'gemini' | 'perplexity' | 'kimi' | 'mcp';
 
@@ -56,6 +57,7 @@ export function AiPromptModal({ input, onClose }: { input: AiPromptInput; onClos
   const { data: session } = useSession();
   const S = STRINGS[lang];
   const [tab, setTab] = useState<Tab>('prompt');
+  const [guide, setGuide] = useState<GuidePlatform | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const prompt = useMemo(() => buildAiPrompt(input), [input]);
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
@@ -110,6 +112,12 @@ export function AiPromptModal({ input, onClose }: { input: AiPromptInput; onClos
             </button>
           ))}
         </div>
+        {tab !== 'mcp' && (
+          <div className="guide-teaser">
+            <span className="ai-note">{S.aiGuideTeaser}</span>
+            <BrandCards onOpen={setGuide} />
+          </div>
+        )}
 
         {tab === 'prompt' && (
           <div>
@@ -217,6 +225,7 @@ export function AiPromptModal({ input, onClose }: { input: AiPromptInput; onClos
 
         {tab === 'mcp' && (
           <div>
+            <BrandCards onOpen={setGuide} />
             <p className="ai-note">
               One link per profile serves its people as live tools — no paste needed once connected. Stateless, works on the free tier.
               Direct MCP link: Claude (Connectors/Desktop/CLI), Gemini CLI, ChatGPT developer/API tools, Kimi K2 API agents.
@@ -272,6 +281,7 @@ export function AiPromptModal({ input, onClose }: { input: AiPromptInput; onClos
           </div>
         )}
       </div>
+      {guide && <GuidesModal platform={guide} onClose={() => setGuide(null)} />}
     </div>
   );
 }
